@@ -1,6 +1,11 @@
 import { CustomError } from "../utils/error.js";
 
 export const errorHandler = (err, req, res, next) => {
+  if (process.env.NODE_ENV === "development") {
+    console.error(err);
+  } else {
+    console.error(err.message);
+  }
   if (err instanceof CustomError) {
     return res.status(err.statusCode).json({
       success: false,

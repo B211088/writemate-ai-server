@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
 const userSchema = new mongoose.Schema(
   {
+    uid: { type: String },
     name: {
       type: String,
       required: [true, "Name is required"],
@@ -9,6 +10,7 @@ const userSchema = new mongoose.Schema(
       minlength: [2, "Name must be at least 2 characters"],
       maxlength: [50, "Name must be at most 50 characters"],
     },
+    avatar: { type: String },
     email: {
       type: String,
       required: [true, "Email is required"],
@@ -19,7 +21,7 @@ const userSchema = new mongoose.Schema(
     },
     passwordHash: {
       type: String,
-      required: true,
+      minlength: 8,
     },
     role: {
       type: String,
@@ -29,6 +31,11 @@ const userSchema = new mongoose.Schema(
     isActive: {
       type: Boolean,
       default: true,
+    },
+    provider: {
+      type: String,
+      enum: ["google", "facebook", "local"],
+      default: "local",
     },
   },
   {

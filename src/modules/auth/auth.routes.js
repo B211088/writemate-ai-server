@@ -3,12 +3,9 @@ import AuthController from "./auth.controller.js";
 
 const router = Router();
 
-router.post("/register", (req, res, next) =>
-  AuthController.register(req, res, next)
-);
-router.post("/login", (req, res, next) => AuthController.login(req, res, next));
-router.post("/logout", (req, res, next) =>
-  AuthController.logout(req, res, next)
-);
+router.post("/register", AuthController.register);
+router.post("/login", AuthController.login);
+router.post("/logout", AuthController.logout);
+router.post("/google-login", AuthController.googleLogin);
 
 export default router;
